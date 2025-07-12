@@ -121,7 +121,8 @@ func (r *ArgoCDRoleReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 				if err := r.Client.Status().Update(ctx, &role); err != nil {
 					r.Log.Error(err, "Failed to update ArgoCDRole status", "name", req.Name)
 				}
-				return ctrl.Result{Requeue: true, RequeueAfter: time.Second}, err
+				return ctrl.Result{}, err
+				// return ctrl.Result{Requeue: true, RequeueAfter: time.Second}, err
 			}
 		}
 
@@ -158,7 +159,7 @@ func (r *ArgoCDRoleReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 	if err := r.Client.Status().Update(ctx, &role); err != nil {
 		r.Log.Error(err, "Failed to update ArgoCDRole status", "name", req.Name)
 	}
-	return ctrl.Result{RequeueAfter: time.Second}, nil
+	return ctrl.Result{RequeueAfter: time.Minute * 10}, nil
 }
 
 // SetupWithManager sets up the controller with the Manager.
