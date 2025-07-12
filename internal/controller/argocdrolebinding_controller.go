@@ -146,7 +146,7 @@ func (r *ArgoCDRoleBindingReconciler) Reconcile(ctx context.Context, req ctrl.Re
 		if err := r.Client.Status().Update(ctx, &rb); err != nil {
 			r.Log.Error(err, "Failed to update ArgoCDRoleBinding status", "name", req.Name)
 		}
-		return ctrl.Result{RequeueAfter: time.Second}, nil
+		return ctrl.Result{RequeueAfter: time.Minute * 10}, nil
 
 	}
 
